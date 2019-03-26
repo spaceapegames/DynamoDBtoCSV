@@ -30,33 +30,37 @@ if (!program.table) {
   process.exit(1);
 }
 
-if (program.region && AWS.config.credentials) {
-  AWS.config.update({ region: program.region });
-} else {
-  AWS.config.loadFromPath(__dirname + "/config.json");
-}
+// var credentials = new AWS.SharedIniFileCredentials();
+// AWS.config.credentials = credentials;
+AWS.config.region = "us-east-1"
 
-if (program.endpoint) {
-  AWS.config.update({ endpoint: program.endpoint });
-}
+//if (program.region && AWS.config.credentials) {
+  //AWS.config.update({ region: program.region });
+//} else {
+  //AWS.config.loadFromPath(__dirname + "/config.json");
+//}
 
-if (program.profile) {
-  var newCreds = new AWS.SharedIniFileCredentials({ profile: program.profile });
-  newCreds.profile = program.profile;
-  AWS.config.update({ credentials: newCreds });
-}
+//if (program.endpoint) {
+  //AWS.config.update({ endpoint: program.endpoint });
+//}
 
-if (program.envcreds) {
-  var newCreds = AWS.config.credentials;
-  newCreds.profile = program.profile;
-  AWS.config.update({
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    },
-    region: process.env.AWS_DEFAULT_REGION
-  });
-}
+//if (program.profile) {
+  //var newCreds = new AWS.SharedIniFileCredentials({ profile: program.profile });
+  //newCreds.profile = program.profile;
+  //AWS.config.update({ credentials: newCreds });
+//}
+
+//if (program.envcreds) {
+  //var newCreds = AWS.config.credentials;
+  //newCreds.profile = program.profile;
+  //AWS.config.update({
+    //credentials: {
+      //accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      //secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    //},
+    //region: process.env.AWS_DEFAULT_REGION
+  //});
+//}
 
 var dynamoDB = new AWS.DynamoDB();
 
